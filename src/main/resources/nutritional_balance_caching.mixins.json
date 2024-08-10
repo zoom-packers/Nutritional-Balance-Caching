@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "Nutritional_Balance_Caching.refmap.json",
   "mixins": [
+    "EventPlayerJoinMixin",
     "WorldNutrientsMixin"
   ],
   "client": [
