@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.pandaismyname1.nutritional_balance_caching.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "Nutritional_Balance_Caching.refmap.json",
+  "mixins": [
+    "WorldNutrientsMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
