@@ -1,5 +1,6 @@
 package com.pandaismyname1.nutritional_balance_caching;
 
+import com.dannyandson.nutritionalbalance.nutrients.WorldNutrients;
 import com.mojang.logging.LogUtils;
 import com.pandaismyname1.nutritional_balance_caching.db.NutrientCache;
 import net.minecraft.client.Minecraft;
@@ -19,6 +20,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -64,12 +66,11 @@ public class NutritionalBalance_Caching {
     }
 
     @SubscribeEvent
-    public void onWorldUnload(LevelEvent.Unload event) {
+    public void onServerStopping(ServerStoppingEvent event) {
         LOGGER.info("Saving Nutrients to Disk");
         NutrientCache.saveNutrients();
         LOGGER.info("Nutrients Saved");
     }
-
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -80,6 +81,7 @@ public class NutritionalBalance_Caching {
         {
             LOGGER.info("Loading Nutrients from Disk");
             NutrientCache.loadNutrients();
+            WorldNutrients.register();
             LOGGER.info("Nutrients Loaded");
         }
 
